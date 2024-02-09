@@ -1,0 +1,6 @@
+[submodule "hono-vite-rsc"]
+	path = stack/hono/hono-vite-rsc
+	url = https://github.com/jacob-ebey/hono-vite-rsc
+[submodule "hono-spa-react"]
+	path = stack/hono/hono-spa-react
+	url = https://github.com/yusukebe/hono-spa-react

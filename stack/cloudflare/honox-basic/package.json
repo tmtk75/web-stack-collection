@@ -1,0 +1,22 @@
+{
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --mode client && vite build",
+    "preview": "wrangler pages dev dist",
+    "deploy": "$npm_execpath run build && wrangler pages deploy dist"
+  },
+  "dependencies": {
+    "hono": "^4.2.2"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240403.0",
+    "@hono/react-renderer": "^0.1.1",
+    "@hono/vite-cloudflare-pages": "^0.2.4",
+    "@hono/vite-dev-server": "^0.10.0",
+    "honox": "^0.1.9",
+    "vite": "^5.0.12",
+    "wrangler": "^3.47.0"
+  },
+  "packageMnager": "pnpm"
+}

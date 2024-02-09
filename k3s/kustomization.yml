@@ -1,0 +1,5 @@
+namespace: default
+
+resources:
+  - ingress.yml
+  - ../stack/nextjs/app-router-prisma

@@ -1,0 +1,100 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-ingress
+  #annotations:
+  #  # working to use nginx. not yet working.
+  #  nginx.ingress.kubernetes.io/rewrite-target: /
+  #annotations:
+  #  traefik.ingress.kubernetes.io/router.middlewares: default-replacepathregex-service2@kubernetescrd,default-replacepathregex-service3@kubernetescrd
+spec:
+  rules:
+    #- host: myapp.example.com
+    - host: localhost
+      http: &default_localhost
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nextjs-app-service
+                port:
+                  number: 8000
+
+    - host: nextjs.localhost
+      http: *default_localhost
+
+    - host: remix.localhost
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: remix-app-service
+                port:
+                  number: 8000
+
+#---
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress
+#metadata:
+#  name: test
+#  namespace: test-namespace
+#  annotations:
+#    traefik.ingress.kubernetes.io/router.middlewares: test-namespace-replacepathregex-service2@kubernetescrd
+#spec:
+#  ingressClassName: traefik
+#  rules:
+#  - http:
+#      paths:
+#      - path: /v2
+#        pathType: Prefix
+#        backend:
+#          service:
+#            name: service2
+#            port:
+#              number: 80
+#      - path: /
+#        pathType: Prefix
+#        backend:
+#          service:
+#            name: service1
+#            port:
+#              number: 80
+
+---
+#
+# links:
+#     https://tm200.hatenablog.com/entry/2021/09/08/234448
+#     https://doc.traefik.io/traefik/middlewares/http/replacepathregex/
+#
+#     https://community.traefik.io/t/traefik-ingress-rewrite-target-does-not-work/13127/4
+#     https://community.traefik.io/t/how-to-configure-middleware-with-kubernetes-ingress-middleware-xyz-does-not-exist/5016
+#     https://community.traefik.io/t/how-to-use-replacepathregex-in-kubernetes-yaml-file-kind-deployment-for-traefik/16255
+#     >
+#     > The deployment resource is used to deploy Traefik pods inside a Kubernetes cluster not for configuring Traefik middleware.
+#     >
+#
+#     https://doc.traefik.io/traefik/routing/providers/kubernetes-ingress/#annotations
+#
+#apiVersion: traefik.io/v1alpha1
+#kind: Middleware
+#metadata:
+#  name: replacepathregex-service2
+#  namespace: default
+#spec:
+#  replacePathRegex:
+#    regex: ^/remix/(.*)
+#    replacement: /$1
+#
+#---
+#apiVersion: traefik.io/v1alpha1
+#kind: Middleware
+#metadata:
+#  name: replacepathregex-service3
+#  namespace: default
+#spec:
+#  replacePathRegex:
+#    regex: ^/nextjs/(.*)
+#    replacement: /$1

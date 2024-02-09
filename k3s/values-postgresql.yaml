@@ -1,0 +1,17 @@
+#
+# https://artifacthub.io/packages/helm/bitnami/postgresql
+#
+#   helm upgrade --install my-postgres oci://registry-1.docker.io/bitnamicharts/postgresql -f values-postgresql.yaml
+#
+auth:
+  #
+  # If you want to change the secret, delete the PVC once.
+  #
+  #     helm uninstall my-postgres
+  #     kubectl delete pvc data-my-postgres-postgresql-0
+  #
+  postgresPassword: abc123 # the password for 'postgres'
+  username: "my-app-user"
+  password: "abc123"
+  database: "my-app-db"
+
