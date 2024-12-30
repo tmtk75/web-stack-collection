@@ -37,7 +37,7 @@ id         = "6f307ce11a7e45a3946f7dc646d09342"
 [[kv_namespaces]]
 binding    = "STORE_KV_preview"
 id         = "6f307ce11a7e45a3946f7dc646d09342"
-preivew_id = "e371e090127c4f6fbc2ae9cead17bc32"
+#preivew_id = "e371e090127c4f6fbc2ae9cead17bc32" # wrangler-3.99.0 doesn't support preview_id anymore.
 
 
 # Bind a Queue producer. Use this binding to schedule an arbitrary task that may be processed later by a Queue consumer.
